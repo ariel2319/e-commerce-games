@@ -1,0 +1,161 @@
+:root{
+  /* COLORES */
+  --color-details: #e03e3e;
+  --color-background-sale: rgb(0, 116, 228);
+  --color-background: #1e1e1e;
+  --color-black: #000;
+  --color-gray: #2b2b2b;
+  --color-fonts-primary: #fff;
+  --color-fonts-secundary: #777f82;
+  
+}
+html {
+  box-sizing: border-box;
+}
+*,*:before,*:after {
+  box-sizing: inherit;
+}
+body{
+  font-size: 18px;
+  margin: 3px;
+  background-color: var(--color-background);
+}
+h6{
+  font-size: 0.4em;
+  text-align: center;
+  background-color: var(--color-gray);
+  color: var(--color-details);
+}
+/* ******************* Header ******************* */
+.header_container {
+  margin-top: 0;
+}
+/* ******************* NAVs ******************* */
+.nav_fixed{
+  width: 100%;
+  position: sticky;
+  background-color:var(--color-details);
+  text-align: center; 
+  border-radius: 0px 0px 2px 2px  ;
+}
+.title_fixed{
+  margin: 2px;
+  font-size: 1.3em;
+}
+.nav_mobile_container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.nav_mobile_container p {
+  color: var(--color-fonts-primary);
+  margin: 2px;
+  font-size: 0.7em ;
+}
+.nav_mobile{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-details);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+}
+.header_menu_img{
+  width: 18px;
+  height: 18px;
+  color: var(--color-fonts-primary);
+}
+.header_img_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.header_img {
+  width: 100%;
+  height: 120px;
+}
+.underline {
+  width: 100%;
+  height: 5px;
+  margin: 3px 0px;
+  border-radius: 3px;
+  background-color: crimson;
+}
+
+/* ******************* MAIN ******************* */
+.main_container{
+display: flex;
+flex-direction: column;
+}
+h2{
+  font-size: 1.1em;
+  color: var(--color-fonts-primary);
+  text-align: center;
+}
+/* ******************* STORE ******************* */
+.store_container{
+  border: 1px solid greenyellow;
+}
+/* ******************* SALE ******************* */
+.sale_container{
+  border: 1px solid greenyellow;
+}
+.sale_card {
+  width: min(100%, 280px);
+  padding: 1px;
+  background-color: var(--color-gray);
+  border: 0.1px solid var(--color-fonts-secundary);
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 var(--color-details);
+  background-color: var(--color-gray);
+}
+.sale_img {
+  width: 100%;
+  height: 330px;
+  border-radius: 3px;
+}
+.sale_card_description {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(2,1fr);
+  border: 1px solid goldenrod;
+  color: var(--color-fonts-primary);
+}
+.sale_card_title {
+  grid-row: 1/2;
+  grid-column: span 4;
+  text-align: center;
+  font-size: 1.2em;
+}
+.sale_card_discount_container {
+  height: 30px;
+  width: 50px;
+  align-self: center;
+  justify-self: center;
+  background-color: var(--color-background-sale);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sale_card_old_price{
+  text-decoration: line-through;
+  color: var(--color-fonts-secundary);
+  margin: auto;
+  font-size: 0.9em;
+}
+.sale_card_price{
+  color: var(--color-fonts-primary);
+  margin: auto;
+  font-size: 1.2em;
+}
+.sale_card_amount{
+  margin: auto auto auto 40%;
+  /* margin-left: 40%; */
+  font-size: 1em;
+  
+}
+/* ******************* FOOTER ******************* */
