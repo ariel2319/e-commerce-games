@@ -188,7 +188,7 @@ h2{
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid greenyellow;
+  /* border: 1px solid greenyellow; */
   gap: 2.5%;
   padding: 15px;
   overflow: hidden;
@@ -250,7 +250,7 @@ h2{
   font-size: 0.9em;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1150px){
   .store_container{
     justify-content: center;
   }
@@ -264,7 +264,7 @@ h2{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid greenyellow;
+  /* border: 1px solid greenyellow; */
   gap: 2%;
   padding: 10px;
   overflow: hidden;
@@ -353,7 +353,7 @@ h2{
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid greenyellow;
+  /* border: 1px solid greenyellow; */
 }
 .foot_text{
   text-align: center;
@@ -367,20 +367,18 @@ h2{
 .foot_❤{
   border-radius: 0px 0px 5px 5px;
 }
-.foot-btn-container{
-  position: absolute;
-  top: 13px;
-  right: 5%;
-}
-.foot-btn-up{
-  height: 30px;
-  width: 30px;
-  margin: 5px 0;
-  border-radius: 50%;
+.foot-a-container{
+  position: relative;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: var(--color-fonts-secundary);
-  outline: none;
+}
+.foot-a-up{
+  position: absolute;
+  border-radius: 5px;
   cursor: pointer;
+  right: 25px;
+  bottom: 12px;
 }
 
 
@@ -425,7 +423,49 @@ h2{
   height: 58px;
   padding: 3px;
 }
+.shop-amount-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-direction: row;
+}
+.btn-amount{
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-background-sale);
+}
 .shop-text{
   margin: auto;
-
+}
+.shop-calc-total{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px;
+  margin-top: 5px;
+  background-color: var(--color-gray);
+  color: var(--color-details);
+  font-size: 1.2em;
+}
+.shop-total{
+  padding: 0 0 8px 0;
+}
+.btn-buy{
+  width: 80px;
+  height: 35px;
+  color: var(--color-details);
+  font-weight: 800;
+  border: 0.5px solid var(--color-details);
+  border-radius: 10px;
+  cursor: pointer;
 }

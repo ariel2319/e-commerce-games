@@ -94,7 +94,7 @@ const gamesList =[
   { id: 14,
     name: 'Half Life 2',
     img: './images/half life 2 portada.jpg',
-    price: 19.9,
+    price: 25.9,
     amount: 5, 
     discount: 50,
   },
@@ -112,7 +112,7 @@ function fillStore () {
         <img class="store_img" src="${img}" alt="${name}">
         <div class="store_card_description">
           <p class="store_card_title">${name}</p>
-          <button class="store_button_add" id="btn-add">
+          <button class="store_button_add agregar" id="btn-add">
             <span class="material-symbols-outlined">
             add_circle
             </span>
@@ -141,7 +141,7 @@ function fillSale () {
         <img class="sale_img" src="${img}" alt="${name}">
         <div class="sale_card_description">
           <p class="sale_card_title">${name}</p>
-          <button class="sale_button_add">
+          <button class="sale_button_add agregar">
             <span class="material-symbols-outlined">
             add_circle
             </span>
@@ -160,3 +160,156 @@ function fillSale () {
   gamesSale.innerHTML = html;
 }
 fillSale();
+
+
+/* Carritooo */
+let carrito = [];
+
+const gamesContenedor =document.querySelector('.shop-cart');
+const totalPrice = document.getElementById('buy-total');
+const buttonBuy = document.querySelector('.btn-checkout');
+
+
+function fillCarrito() {
+  let html='';
+  for (const {id, amount} of carrito) {
+    //condición para ir llenando el carro de compras, si en carrito no hay id coincidente con alguno de la gamesList, entonces no ya nada que meter en el carro
+    const {name, img, price} = gamesList.find((game) => game.id === id)
+    const subPrice = price * amount; 
+      html += `
+      <div class="shop-details">
+        <div class="shop-img-container"> 
+          <img src="${img}" alt="${name}" class="mini-img">
+        </div>
+        <div class="shop-text">${name}</div>
+        <div class="shop-amount-container">
+          <button class="btn-amount" id="btn-remove" data-id="${id}"> 
+            <span class="material-symbols-outlined">
+            do_not_disturb_on
+            </span> 
+          </button>
+          <div class="shop-text"> ${amount} </div>
+          <button class="btn-amount" id="btn-add" data-id="${id}"> 
+            <span class="material-symbols-outlined">
+            add_circle
+            </span> 
+          </button>
+        </div>
+        <div class="shop-text"> $${subPrice} </div>
+      </div>
+      `
+      /* console.log (html); */
+  }
+  /* sección innerhtml */
+  gamesContenedor.innerHTML = html;
+  totalPrice.innerHTML = total();
+}
+/* fillCarrito(); */
+
+function addCarrito (id) {
+  const cantidad = 1;
+  //si la id que pasamos por parametro es igual a la id de un game, entonces guardamos el boolean en findProduct
+  const findProduct = gamesList.find((game)=> game.id === id);
+  
+  //si findProduct es T y su valor es mayo que 0
+  if (findProduct && findProduct.amount > 0) {
+    const findGame = carrito.find ((gameCarro) => gameCarro.id === id);
+
+    if (findGame) {
+      //verificamos sihay unid disponibles paara la venta, sino largo un cartelito
+      if (checkUnits(id, cantidad + findGame.amount)){
+        findGame.amount += cantidad;
+        } else {
+          window.alert('supera las unidaedes disponibles')
+      }
+    } else {
+      carrito.push({id, cantidad});
+    } 
+  }  else {
+      window.alert('Lo sentimos, no contamos con unidades disponibles')
+  }
+  fillCarrito();
+}
+
+function checkUnits (id, cantidad) {
+  const findProduct = gamesList.find(game => game.id === id)
+
+  return findProduct.amount - cantidad >= 0; 
+}
+
+function removeOfCarrito(id) {
+  const cantidad=1;
+
+  const findGame = carrito.find ((gameCarro)=> gameCarro.id === id)
+
+  if (findGame && findGame.amount -cantidad > 0) {
+    findGame.amount -= cantidad;
+  } else {
+    carrito = carrito.filter((gameCarro) => gameCarro.id !== id)
+  }
+  fillCarrito();
+}
+
+function removeGame (id) {
+  carrito = carrito.filter((gameCarro) => gameCarro.id !== id)
+  fillCarrito();
+}
+
+function countItems() {
+  let suma = 0;
+  for ( const item of carrito) {
+    suma+= item.amount;
+  }
+  return suma;
+}
+
+function total () {
+  let suma = 0;
+
+  for (const item of carrito) {
+  const findProduct = gamesList.find((game) => game.id === item.id);
+  suma += item.amount * findProduct.price
+  }
+  return suma;
+}
+
+function buy () {
+  for (const item of carrito) {
+    const findProduct = gamesList.find((game) => game.id === item.id);
+
+    findProduct.amount -= item.cantidad
+  }
+
+  window.alert ('Ty 4 your buy')
+  carrito = [];
+  fillCarrito();
+  fillSale();
+  fillStore();
+}
+
+fillCarrito();
+
+gamesStore.addEventListener('click', (e) =>{
+  if (e.target.closest('.agregar')) {
+    const id = +e.target.closest('.agregar').dataset.id
+    addCarrito(id);
+  }
+})
+
+gamesContenedor.addEventListener('click', (e) =>{
+  if (e.target.closest('#btn-add')) {
+    const id = +e.target.closest('#btn-add').dataset.id
+    addCarrito(id);
+  }
+
+  if (e.target.closest('#btn-remove')) {
+    const id = +e.target.closest('#btn-remove').dataset.id
+    removeGame(id);
+  }
+})
+
+
+
+buttonBuy.addEventListener('click', (e)=> {
+  buy();
+})
