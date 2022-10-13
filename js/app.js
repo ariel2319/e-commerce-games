@@ -94,7 +94,7 @@ const gamesList =[
   { id: 14,
     name: 'Half Life 2',
     img: './images/half life 2 portada.jpg',
-    price: 25.9,
+    price: 19.9,
     amount: 5, 
     discount: 50,
   },
@@ -150,7 +150,7 @@ function fillSale () {
             <p class="sale_card_discount">%${discount}</p>
           </div>
           <p class="sale_card_old_price">$ ${price}</p>
-          <p class="sale_card_price">$${priceDiscount.toPrecision(4)}</p>
+          <p class="sale_card_price">$${priceDiscount.toFixed(2)}</p>
           <p class="sale_card_amount">${amount} U.</p>
         </div>
       </article>
@@ -274,22 +274,25 @@ function total () {
 }
 
 function buy () {
-  for (const item of carrito) {
-    const findProduct = gamesList.find((game) => game.id === item.id);
+    for (const item of carrito) {
+      const findProduct = gamesList.find((game) => game.id === item.id);
 
-    findProduct.amount -= item.cantidad
-  }
+      findProduct.amount -= item.cantidad
+    }
 
-  window.alert ('Ty 4 your buy')
-  carrito = [];
-  fillCarrito();
-  fillSale();
-  fillStore();
-}
+    window.alert ('Ty 4 your buy')
+    carrito = [];
+    fillCarrito();
+    fillSale();
+    fillStore();
+} 
 
 fillCarrito();
 
 gamesStore.addEventListener('click', (e) =>{
+  
+  console.log ()
+  
   if (e.target.closest('.agregar')) {
     const id = +e.target.closest('.agregar').dataset.id
     addCarrito(id);
